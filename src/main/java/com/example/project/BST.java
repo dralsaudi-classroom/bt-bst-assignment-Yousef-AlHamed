@@ -158,12 +158,14 @@ public class BST<T> {
 			return 0;
 		
 		BSTNode<T> kNode = root;
-		while (kNode.key != k) {
+		while (kNode.key != k || kNode != null) {
 			if (k < kNode.key)
 				kNode = kNode.left;
 			else
 				kNode = kNode.right;
 		}
+		if (kNode == null)
+			return 0;
 		
 		int count = 0;
 		LinkedStack<BSTNode<T>> stack = new LinkedStack<BSTNode<T>>();
