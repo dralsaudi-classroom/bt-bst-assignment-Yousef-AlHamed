@@ -158,7 +158,7 @@ public class BST<T> {
 			return 0;
 		
 		BSTNode<T> kNode = root;
-		while (kNode.key != k || kNode != null) {
+		while (kNode != null && kNode.key != k) {
 			if (k < kNode.key)
 				kNode = kNode.left;
 			else
