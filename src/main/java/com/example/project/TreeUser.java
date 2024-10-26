@@ -2,21 +2,30 @@ package com.example.project;
 
 public class TreeUser {
 	public static <T> int countLeaves(BT<T> bt) {
-		if (bt.isLeaf()) {
-			return 1;
-		}
-
-		int Count = 0;
-		if (bt.find(Relative.LeftChild)) {
-			Count += countLeaves(bt);
-			bt.find(Relative.Parent);
-		}
-
-		if (bt.find(Relative.RightChild)) {
-			Count += countLeaves(bt);
-			bt.find(Relative.Parent);
-		}
-
-		return Count;
+		if (bt.empty())
+			return 0;
+		
+		bt.find(Relative.Root);
+		
+		return LeafCounter(bt);
 	}
+
+	private static int LeafCounter(BT Tree) {
+		if (Tree.isLeaf())
+			return 1;
+		int leafCount = 0;
+
+		if (Tree.find(Relative.LeftChild)) {
+			leafCount += LeafCounter(Tree);
+			Tree.find(Relative.Parent);
+		}
+		if (Tree.find(Relative.RightChild)) {
+			leafCount += LeafCounter(Tree);
+			Tree.find(Relative.Parent);
+		}
+
+		return leafCount;
+	}
+	
+	
 }

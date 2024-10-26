@@ -100,19 +100,14 @@ public class BT<T> {
 	}
 	public int countLeaves() {
 		int count = 0;
-		
-		BTNode <T> RightMostLeaf = root;
-		
-		while (RightMostLeaf.right != null)
-			RightMostLeaf = RightMostLeaf.right;
-		if (RightMostLeaf.left != null)
-			RightMostLeaf = RightMostLeaf.left;
-		
+		if (root == null)
+			return 0;
 		
 		LinkedStack<BTNode<T>> stack = new LinkedStack<BTNode<T>>();
 		BTNode<T> q = root;
+		stack.push(q);
 		
-		while(q != RightMostLeaf) {
+		while(!stack.empty()) {
 			if(q.left == null && q.right == null)
 				count++;
 			else if (q.right != null)
@@ -123,7 +118,7 @@ public class BT<T> {
 			else
 				q = stack.pop();
 		}
-		return ++count;
+		return count;
 
 	}
 }

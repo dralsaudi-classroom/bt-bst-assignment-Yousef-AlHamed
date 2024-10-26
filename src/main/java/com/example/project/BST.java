@@ -154,7 +154,8 @@ public class BST<T> {
 		return p;
 	}
 	public int countNodesIn(int k) {
-		int count = 0;
+		if (this.empty())
+			return 0;
 		
 		BSTNode<T> kNode = root;
 		while (kNode.key != k) {
@@ -164,17 +165,12 @@ public class BST<T> {
 				kNode = kNode.right;
 		}
 		
-		BSTNode<T> RightMostLeaf = kNode;
-
-		while (RightMostLeaf.right != null)
-			RightMostLeaf = RightMostLeaf.right;
-		if (RightMostLeaf.left != null)
-			RightMostLeaf = RightMostLeaf.left;
-
+		int count = 0;
 		LinkedStack<BSTNode<T>> stack = new LinkedStack<BSTNode<T>>();
 		BSTNode<T> q = kNode;
+		stack.push(q);
 
-		while (q != RightMostLeaf) {
+		while (!stack.empty()) {
 			if (q.right != null)
 				stack.push(q.right);
 
@@ -187,7 +183,7 @@ public class BST<T> {
 				count++;
 			}
 		}
-		return ++count;
+		return count;
 
 	}
 }
